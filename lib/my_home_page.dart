@@ -10,32 +10,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Widget _showColumn(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Center(
+            child: Text(
+              text,
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          Center(
+            child: Text(text),
+          ),
+          Center(
+            child: Text(text),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Row(
-        children: [
-          Padding(padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Center(child: Text('Hello World 1', style: TextStyle(color: Colors.blue),),),
-              Center(child: Text('Hello World 1'),),
-              Center(child: Text('Hello World 1'),),
-            ],
-          ),),
-          Padding(padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Center(child: Text('Hello World 2', style: TextStyle(color: Colors.blue),),),
-              Center(child: Text('Hello World 2'),),
-              Center(child: Text('Hello World 2'),),
-            ],
-          ),)
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Row(
+          children: [
+            _showColumn('Hello World 1'),
+            _showColumn('Hello World 2'),
+          ],
+        ));
   }
 }
