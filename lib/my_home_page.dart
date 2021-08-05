@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_upskilling/button.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -56,10 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Row(
               children: [
-                Text(widget.result.toString()),
-                TextButton(onPressed: () {changeNumber('1');}, child: Text('1')),
-                TextButton(onPressed: () {changeNumber('2');}, child: Text('2')),
-                TextButton(onPressed: () {_result();}, child: Text('Result')),
+                Column(
+                  children: [
+                    Text(widget.result.toString()),
+                    ButtonNumber(textNumber: '1', callback: () => changeNumber('1')),
+                    ButtonNumber(textNumber: '2', callback: () => changeNumber('2')),
+                    TextButton(onPressed: () {_result();}, child: Text('Result')),
+                  ],
+                ),
               ],
             ),
           ],

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: Calculator(title: 'Calculator Page'),
+      home: MyHomePage(title: 'Calculator Page'),
     );
   }
 }
