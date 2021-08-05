@@ -3,33 +3,47 @@ import 'package:flutter/material.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
+  // bersifat state, nilai awal yang dapat berubah menggunakan setState
   final String title;
+  String stateWord = 'Ikbal';
+  String number1 = '';
+  String number2 = '';
+  int result = 0;
+  String mark = '';
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget _showColumn(String text) {
+  Widget _showColumn(String hello) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Center(
-            child: Text(
-              text,
-              style: TextStyle(color: Colors.blue),
-            ),
-          ),
-          Center(
-            child: Text(text),
-          ),
-          Center(
-            child: Text(text),
-          ),
+          Padding(padding: const EdgeInsets.all(8.0), child: Text('Hello World')),
+          Padding(padding: const EdgeInsets.all(8.0), child: Text(hello)),
         ],
       ),
     );
+  }
+
+  changeNumber(String number) {
+    setState(() {
+      if (widget.number1 == '') {
+        widget.number1 = number;
+      } else {
+        widget.number2 = number;
+      }
+    });
+  }
+
+  _result() {
+    setState(() {
+      int num1 = int.parse(widget.number1);
+      int num2 = int.parse(widget.number2);
+      widget.result = num1 + num2;
+    });
   }
 
   @override
@@ -38,10 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Row(
+        body: Column(
           children: [
-            _showColumn('Hello World 1'),
-            _showColumn('Hello World 2'),
+            Row(
+              children: [
+                Text(widget.result.toString()),
+                TextButton(onPressed: () {changeNumber('1');}, child: Text('1')),
+                TextButton(onPressed: () {changeNumber('2');}, child: Text('2')),
+                TextButton(onPressed: () {_result();}, child: Text('Result')),
+              ],
+            ),
           ],
         ));
   }
