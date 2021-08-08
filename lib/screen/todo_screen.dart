@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_upskilling/model/todo_model.dart';
+import 'package:flutter_upskilling/repository/todo_repository.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({ Key? key }) : super(key: key);
@@ -9,7 +10,7 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  List<TodoModel> todos = <TodoModel>[];
+  TodoRepository _todoRepository = new TodoRepository();
   TextEditingController todoName = new TextEditingController();
   TextEditingController todoNumber = new TextEditingController();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -57,7 +58,11 @@ class _TodoScreenState extends State<TodoScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         setState(() {
-                          todos.add(new TodoModel(todos.length + 1, todoName.text, todoNumber.text));
+                          _todoRepository.addTodo(new TodoModel(
+                            _todoRepository.getListTodo().length + 1,
+                            todoName.text,
+                            todoNumber.text
+                          ));
                         });
                       }
                     }, 
@@ -71,7 +76,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
                 child: Scrollbar(
                   child: ListView.builder(
-                    itemCount: todos.length,
+                    itemCount: _todoRepository.getListTodo().length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
@@ -86,14 +91,16 @@ class _TodoScreenState extends State<TodoScreen> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text("Name: ${todos[index].name},"),
-                                    Text("Number: ${todos[index].number},"),
+                                    Text("Name: ${_todoRepository.getListTodo()[index].name},"),
+                                    Text("Number: ${_todoRepository.getListTodo()[index].number},"),
                                   ]
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
-                                      todos.remove(todos[index]);
+                                      _todoRepository.deleteTodo(
+                                        _todoRepository.getListTodo()[index].id
+                                      );
                                     });
                                   }, 
                                   child: Icon(Icons.delete_forever, size: 25)
