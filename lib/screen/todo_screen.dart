@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_upskilling/model/todo_model.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({ Key? key }) : super(key: key);
@@ -8,7 +9,7 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  List todos = [];
+  List<TodoModel> todos = <TodoModel>[];
   TextEditingController todoName = new TextEditingController();
   TextEditingController todoNumber = new TextEditingController();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -56,7 +57,7 @@ class _TodoScreenState extends State<TodoScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         setState(() {
-                          todos.add([todoName.text, todoNumber.text]);
+                          todos.add(new TodoModel(todos.length + 1, todoName.text, todoNumber.text));
                         });
                       }
                     }, 
@@ -85,8 +86,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text("Name: ${todos[index][0]},"),
-                                    Text("Number: ${todos[index][1]},"),
+                                    Text("Name: ${todos[index].name},"),
+                                    Text("Number: ${todos[index].number},"),
                                   ]
                                 ),
                                 ElevatedButton(
@@ -99,6 +100,9 @@ class _TodoScreenState extends State<TodoScreen> {
                                 )
                               ]
                             ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/detail');
+                            },
                           )
                         ],
                       );
