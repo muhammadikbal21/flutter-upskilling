@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_upskilling/calculator.dart';
-import 'package:flutter_upskilling/my_home_page.dart';
+import 'package:flutter_upskilling/screen/todo_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: MyHomePage(title: 'Calculator Page'),
+      home: TodoScreen(),
     );
   }
 }
