@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_upskilling/view/counter/counter.dart';
+import 'package:flutter_upskilling/screen/book_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       routes: {
-        '/': (context) => CounterScreen(),
+        '/': (context) => BookScreen(),
       },
     );
   }
