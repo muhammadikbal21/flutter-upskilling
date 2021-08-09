@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_upskilling/button_counter/button_decrement.dart';
 import 'package:flutter_upskilling/button_counter/button_increment.dart';
+import 'package:flutter_upskilling/button_counter/counter_operator.dart';
 import 'package:flutter_upskilling/view_model/counter_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,25 +21,17 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
       body: ChangeNotifierProvider(
         create: (context) => CounterViewModel(),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Consumer<CounterViewModel>(
-                builder: (context, value, child) {
-                  return Text('${value.val}', style: TextStyle(fontSize: 30.0));
-                },
-              )
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ButtonIncrement(),
-                ButtonDecrement()
-              ],
-            )
-          ],
-        ),
+        builder: (context, child) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Text('${context.watch<CounterViewModel>().val}', style: TextStyle(fontSize: 30.0)),
+              ),
+              CounterOperator()
+            ],
+          );
+        }
       )
       
       

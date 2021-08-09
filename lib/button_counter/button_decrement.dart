@@ -10,7 +10,7 @@ class ButtonDecrement extends StatelessWidget {
     return Container(
       child: TextButton(
           onPressed: () {
-            Provider.of<CounterViewModel>(context, listen: false).decrement();
+            context.read<CounterViewModel>().decrement();
           },
           child: Text('-', style: TextStyle(fontSize: 30.0))),
     );

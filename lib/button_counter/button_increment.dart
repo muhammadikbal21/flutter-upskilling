@@ -10,7 +10,7 @@ class ButtonIncrement extends StatelessWidget {
     return Container(
       child: TextButton(
           onPressed: () {
-            Provider.of<CounterViewModel>(context, listen: false).increment();
+            context.read<CounterViewModel>().increment();
           },
           child: Text('+', style: TextStyle(fontSize: 30.0))),
     );
