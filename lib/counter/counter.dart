@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_upskilling/button_counter/button_decrement.dart';
+import 'package:flutter_upskilling/button_counter/button_increment.dart';
 
 class CounterScreen extends StatefulWidget {
   const CounterScreen({ Key? key }) : super(key: key);
@@ -9,6 +11,20 @@ class CounterScreen extends StatefulWidget {
 
 class _CounterScreenState extends State<CounterScreen> {
   int value = 0;
+
+  increment () {
+    setState(() {
+      value++;
+    });
+  }
+
+  decrement () {
+    setState(() {
+      if (value > 0) {
+        value--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +41,8 @@ class _CounterScreenState extends State<CounterScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    value++;
-                  });
-                }, 
-                child: Text('+', style: TextStyle(fontSize: 30.0))
-              ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    if (value > 0) {
-                      value--;
-                    }
-                  });
-                }, 
-                child: Text('-', style: TextStyle(fontSize: 30.0))
-              ),
+              ButtonIncrement(increment: increment),
+              ButtonDecrement(decrement: decrement)
             ],
           )
         ],
