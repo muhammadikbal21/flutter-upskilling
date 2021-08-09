@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_upskilling/model/todo_model.dart';
 import 'package:flutter_upskilling/repository/todo_repository.dart';
+import 'package:flutter_upskilling/screen/todo_detail_screen.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({ Key? key }) : super(key: key);
@@ -108,7 +109,14 @@ class _TodoScreenState extends State<TodoScreen> {
                               ]
                             ),
                             onTap: () {
-                              Navigator.pushNamed(context, '/detail');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TodoDetailScreen(
+                                    todoModel: _todoRepository.getListTodo()[index]
+                                  )
+                                )
+                              );
                             },
                           )
                         ],

@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => TodoScreen(),
-        '/detail': (context) => TodoDetailScreen()
       },
     );
   }

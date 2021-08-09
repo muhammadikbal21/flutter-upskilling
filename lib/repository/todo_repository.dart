@@ -3,6 +3,16 @@ import 'package:flutter_upskilling/model/todo_model.dart';
 class TodoRepository {
   List<TodoModel> todos = <TodoModel>[];
 
+  String name = "";
+
+  setName(String name) {
+    this.name = name;
+  }
+
+  getName() {
+    return name;
+  }
+
   List<TodoModel> getListTodo() {
     return todos;
   }
