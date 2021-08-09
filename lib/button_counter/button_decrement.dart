@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_upskilling/view_model/counter_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ButtonDecrement extends StatelessWidget {
-  final Function decrement;
-  const ButtonDecrement({Key? key, required this.decrement}) : super(key: key);
+  const ButtonDecrement({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextButton(
           onPressed: () {
-            decrement();
+            Provider.of<CounterViewModel>(context, listen: false).decrement();
           },
           child: Text('-', style: TextStyle(fontSize: 30.0))),
     );
