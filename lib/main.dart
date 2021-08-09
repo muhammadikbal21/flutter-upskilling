@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_upskilling/screen/todo_detail_screen.dart';
-import 'package:flutter_upskilling/screen/todo_screen.dart';
+import 'package:flutter_upskilling/counter/counter.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       routes: {
-        '/': (context) => TodoScreen(),
+        '/': (context) => CounterScreen(),
       },
     );
   }
