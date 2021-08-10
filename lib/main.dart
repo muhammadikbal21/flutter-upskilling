@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_upskilling/screen/book_form_screen.dart';
 import 'package:flutter_upskilling/screen/book_screen.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       routes: {
-        '/': (context) => BookScreen(),
+        '/': (context) => BookFormScreen(),
+        '/book-screen': (context) => BookScreen()
       },
     );
   }

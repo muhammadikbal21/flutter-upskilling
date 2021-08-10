@@ -16,4 +16,10 @@ class BookViewModel with ChangeNotifier { // ChangeNotifier lebih prefer menggun
     _book = newBook; // mengupdate valuenya
     notifyListeners(); // meng-listen perubahan valuenya
   }
+
+  addBook(BookModel newBook) async {
+    final newBookRegistered = await _bookRepository.addBook(newBook);
+    print(newBookRegistered);
+    notifyListeners();
+  }
 }
