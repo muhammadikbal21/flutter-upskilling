@@ -39,4 +39,10 @@ class DBHelper {
     final Database? db = await INSTANCE.database;
     return db?.insert(tableName, data);
   }
+
+  // query untuk mendapatkan data sesuai id (get by id)
+  Future<dynamic> query(String tableName, String field, List<dynamic> data) async {
+    final Database? database = await INSTANCE.database;
+    return database?.query(tableName, where: field, whereArgs: data);
+  }
 }

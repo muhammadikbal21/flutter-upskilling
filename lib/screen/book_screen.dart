@@ -11,10 +11,17 @@ class BookScreen extends StatefulWidget {
 
 class _BookScreenState extends State<BookScreen> {
   BookRepository _bookRepository = BookRepository();
+  BookModel? book;
+
+  getBook() async {
+    final newBook = await _bookRepository.getBookById('4'); // mendapatkan data dengan id yang diinginkan lewat parameter function getBookById
+    setState(() {
+      book = newBook; // mengupdate value sesuai yang id yang diinginkan
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    _bookRepository.addBook(BookModel(title: 'Harry Potter', publisher: 'J.K.Rowling'));
     return SafeArea(
        child: Scaffold(
         appBar: AppBar(
@@ -22,7 +29,29 @@ class _BookScreenState extends State<BookScreen> {
         ),
         body: Column(
           children: [
-
+            // Menampilkan Title dari Book sesuai Database
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text(
+                book != null ? book!.title : ''
+              ),
+            ),
+            // Menampilkan Publisher dari Book sesuai Database
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text(
+                book != null ? book!.publisher : ''
+              ),
+            ),
+            // Button untuk melihat perubahan Title dan Publisher
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  getBook();
+                }, 
+                child: Text('Show Book')
+              ),
+            )
           ]
         )
        )

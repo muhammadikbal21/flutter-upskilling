@@ -11,4 +11,14 @@ class BookRepository {
       'publisher': book.publisher
     });
   }
+
+  Future<BookModel?> getBookById(String title) async {
+    final List<dynamic> result = await _dbHelper.query(BookDAO.TABLE_NAME, 'id = ?', [title]);
+
+    if (result != null) {
+      return BookModel.fromMap(result.first); // result.first untuk mendapatkan elemen pertama dari list yang sesuai dengan query
+    } else {
+      return null;
+    }
+  }
 }
