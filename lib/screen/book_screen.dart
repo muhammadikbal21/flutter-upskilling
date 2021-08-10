@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_upskilling/model/book_model.dart';
 import 'package:flutter_upskilling/repository/book_repository.dart';
+import 'package:flutter_upskilling/view_model/book_view_model.dart';
+import 'package:provider/provider.dart';
 
 class BookScreen extends StatefulWidget {
   const BookScreen({ Key? key }) : super(key: key);
@@ -10,16 +12,6 @@ class BookScreen extends StatefulWidget {
 }
 
 class _BookScreenState extends State<BookScreen> {
-  BookRepository _bookRepository = BookRepository();
-  BookModel? book;
-
-  getBook() async {
-    final newBook = await _bookRepository.getBookById('4'); // mendapatkan data dengan id yang diinginkan lewat parameter function getBookById
-    setState(() {
-      book = newBook; // mengupdate value sesuai yang id yang diinginkan
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,29 +21,38 @@ class _BookScreenState extends State<BookScreen> {
         ),
         body: Column(
           children: [
-            // Menampilkan Title dari Book sesuai Database
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                book != null ? book!.title : ''
-              ),
+            ChangeNotifierProvider(
+              create: (context) => BookViewModel(),
+              builder: (context, child) {
+                return Column(
+                  children: [
+                    // Menampilkan Title dari Book sesuai Database
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        context.watch<BookViewModel>().book?.title??'' // cara simple ternary operator
+                      ),
+                    ),
+                    // Menampilkan Publisher dari Book sesuai Database
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        context.watch<BookViewModel>().book?.publisher??''
+                      ),
+                    ),
+                    // Button untuk melihat perubahan Title dan Publisher
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          context.read<BookViewModel>().getBookById();
+                        }, 
+                        child: Text('Show Book')
+                      ),
+                    )
+                  ],
+                );
+              },
             ),
-            // Menampilkan Publisher dari Book sesuai Database
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                book != null ? book!.publisher : ''
-              ),
-            ),
-            // Button untuk melihat perubahan Title dan Publisher
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  getBook();
-                }, 
-                child: Text('Show Book')
-              ),
-            )
           ]
         )
        )
