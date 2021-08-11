@@ -46,4 +46,17 @@ class BookModel {
     'price': price,
     'stock': stock,
   };
+
+  factory BookModel.fromJson(Map<String, dynamic> parsedJson) {
+    return BookModel(
+      id: parsedJson['id'],
+      title: parsedJson['title'], 
+      desc: parsedJson['desc'], 
+      year: parsedJson['year'], 
+      pages: parsedJson['pages'], 
+      language: parsedJson['language'], 
+      publisher: parsedJson['publisher'], 
+      price: parsedJson['price'], 
+      stock: parsedJson['stock']);
+  }
 }

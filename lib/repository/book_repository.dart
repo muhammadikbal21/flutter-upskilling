@@ -2,6 +2,7 @@ import 'package:flutter_upskilling/api/api_helper.dart';
 import 'package:flutter_upskilling/dao/book_dao.dart';
 import 'package:flutter_upskilling/db/db_helper.dart';
 import 'package:flutter_upskilling/model/book_model.dart';
+import 'package:flutter_upskilling/model/response_book.dart';
 
 class BookRepository {
   final DBHelper _dbHelper = DBHelper.INSTANCE;
@@ -20,5 +21,11 @@ class BookRepository {
     } else {
       return null;
     }
+  }
+
+  Future<List<BookModel>> getProduct() async {
+    final response = await _apiHelper.getData('/books');
+    print(ResponseBook.fromJson(response).data);
+    return ResponseBook.fromJson(response).data;
   }
 }

@@ -21,4 +21,17 @@ class ApiHelper {
       throw Exception('Could not Connect');
     }
   }
+
+  Future<dynamic> getData(String path, {Map<String, dynamic>? queryParameter}) async {
+    try {
+      Response response = await _dio.get(path, queryParameters: queryParameter);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else {
+        throw Exception('Failed to load get');
+      }
+    } catch (e) {
+      throw Exception('Could not connect');
+    }
+  }
 }
